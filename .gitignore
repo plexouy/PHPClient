@@ -1,0 +1,13 @@
+/composer.lock
+/vendor
+
+index.php
+index1.php
+/src/PaymentGatewayClient.php
+/src/PaymentGatewayClientFactory.php
+/src/Certificate/CertificateHelper.php
+/src/Certificate/CertificateHelperFactory.php
+.env
+mensajes/
+/tests/CertificateTest_.php
+/test/
