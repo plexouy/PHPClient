@@ -17,12 +17,16 @@ class Reference extends Sdk\Message {
 
     public function toArray($canonize = false)
     {
-        $arr = $this->to_array();
-        $data = [
-            'Client' => $this->client,
-            'Request' => $arr,
+        $arr = $canonize
+        ? [
+            'MetaReference' => $this->MetaReference,
+            'Type' => $this->Type,
+        ]
+        : [
+            'MetaReference' => $this->MetaReference,
+            'Type' => $this->Type,
         ];
-        return $data;
+        return $arr;
     }
 	
 	public static function getValidationMetadata()
