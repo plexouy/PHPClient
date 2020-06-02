@@ -27,17 +27,17 @@ class Reference extends ModelsBase
         ];
     }
 
-//    public function toArray($canonize = false)
-//    {
-//        $arr = $canonize
-//            ? [
-//                'MetaReference' => $this->data['MetaReference'],
-//                'Type' => $this->data['Type'],
-//            ]
-//            : [
-//                'MetaReference' => $this->data['MetaReference'],
-//                'Type' => $this->data['Type'],
-//            ];
-//        return $arr;
-//    }
+    public function toArray($canonize = false)
+    {
+        $arr = $canonize
+        ? [
+            'MetaReference' => $this->MetaReference,
+            'Type' => $this->Type,
+        ]
+        : [
+            'MetaReference' => $this->MetaReference,
+            'Type' => $this->Type,
+        ];
+        return $arr;
+    }
 }
