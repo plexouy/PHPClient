@@ -2,6 +2,7 @@
 namespace Plexo\Sdk\Message;
 
 use Plexo\Sdk;
+use Plexo\Sdk\Type\ReferenceType;
 
 class Reference extends Sdk\Message {
 
@@ -28,8 +29,8 @@ class Reference extends Sdk\Message {
         ];
         return $arr;
     }
-	
-	public static function getValidationMetadata()
+    
+    public static function getValidationMetadata()
     {
         return [
             'Type' => [

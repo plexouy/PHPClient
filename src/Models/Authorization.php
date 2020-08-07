@@ -25,6 +25,7 @@ class Authorization extends ModelsBase
         'ExtendableInstrumentToken' => null,
         'LimitIssuers' => null,
         'MetaReference' => null,
+        'OptionalCommerceId' => null,
         'OptionalMetadata' => null,
         'PromotionInfoIssuers' => null,
         'RedirectUri' => null,
@@ -50,6 +51,10 @@ class Authorization extends ModelsBase
                 'type' => 'string',
                 'required' => true,
            ],
+            'OptionalCommerceId' => [
+                'type' => 'int',
+                'required' => false,
+            ],
             'OptionalMetadata' => [
                 'type' => 'string',
                 'required' => false,

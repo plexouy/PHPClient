@@ -28,6 +28,11 @@ class Client implements SecurePaymentGatewayInterface
     {
         $this->configureDefaults($options);
         $this->setLogger($this->config['logger']);
+        if (!array_key_exists($this->config['env'], self::$env)) {
+            $error_message = sprintf("Entorno '%s' no válido. Los entornos disponibles son: 'prod' y 'test'.", $this->config['env']);
+            $this->logger->critical($error_message);
+            throw new Exception\ConfigurationException($error_message);
+        }
         $this->http_client = new \GuzzleHttp\Client([
             'base_uri' => $this->config['base_uri'] ? $this->config['base_uri'] : self::$env[$this->config['env']],
             'headers' => [
