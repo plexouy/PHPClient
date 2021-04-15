@@ -9,4 +9,5 @@ abstract class ActionType
     const SESSION_EXTEND_AMOUNT   = 0b001000;
     const CLIENT_EXTEND_AMOUNT    = 0b010000;
     const ASK_FOR_TEMPORARY_ITEMS = 0b100000;
+    const EXPRESS_CHECKOUT        = 0b1000000;
 }
