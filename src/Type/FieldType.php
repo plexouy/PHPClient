@@ -20,7 +20,8 @@ class FieldType {
     const FIRST_NAME                   = 0x10F;
     const LAST_NAME                    = 0x110;
     const CITY                         = 0x111;
-
+    const STATE                        = 0x112;
+    
     // New OptionalFields
     const COUNTRY               = 0x0201;
     const SHIPPING_ADDRESS      = 0x0202;
@@ -32,11 +33,16 @@ class FieldType {
     const TRANSACTION_DATE_TIME = 0x0208;
     const DEFERRED_MONTHS       = 0x0209;
     const PLAN                  = 0x020A;
-	const RECURRINGPAYMENT      = 0x020B;
-
+    const RECURRINGPAYMENT      = 0x020B;
+    const ISSUERID              = 0x020C;
+    const PAYMENTLINK           = 0x020D;
+    const SHIPPINGFIRSTNAME     = 0x020E;
+    const SHIPPINGLASTNAME      = 0x020F;
+    const SHIPPINGPHONENUMBER   = 0x0210;
+    
     // Provider Related Information starts at 0x400
     const PROVIDER                     = 0x401;// Example Visa
-
+    
     // User/Provider Related Information starts at 0x500. User Flag | Provider Flag
     const SISTARBANK_PAYMENT_METHOD    = 0x501;
     const REDPAGOS_PRODUCT_NUMBER      = 0x502;
@@ -47,7 +53,9 @@ class FieldType {
     const CYBERSOURCE_DEVICE_FINGERPRINT = 0x507;
     const CLIENT_IP                      = 0x508;
     const INTEGER_ID                     = 0x509;
-
+    const REFUNDINTEGER_ID               = 0x50A;
+    
+    
     // Commerce Related Information starts at 0x800
     const PROVIDER_COMMERCE_NUMBER     = 0x801;// This Could be the commerce id (Master/Oca/Visa/Etc)
     const OCA_TAXI_CODE                = 0x802;
@@ -56,7 +64,7 @@ class FieldType {
     const PROVIDER_MERCHANT_ID                   = 0x805;
     const PROVIDER_BRANCH_NUMBER                 = 0x806;
     const COMMERCE_RESERVE_EXPIRATION_IN_SECONDS = 0x807;
-	const SOFTDESCRIPTOR= 0x808;
+    const SOFTDESCRIPTOR= 0x808;
     const MCC= 0x809;
     const COMMERCECOUNTRY= 0x810;
     const COMMERCECITY= 0x811;
@@ -67,22 +75,23 @@ class FieldType {
     const PAYMENTFACILITATORID= 0x816;
     const PAYMENTFACILITATORCOMMERCEID= 0x817;
     const PAYMENTFACILITATORINTEGRATORID= 0x818;
-
+    const AVAILABLEBANKS= 0x819;
+    
     // Secure Information Starts at 0x8100. Private Flag | User Flag
     // Secure User Generic Information
     const PAN                          = 0x8101;
     const TOKEN                        = 0x8102;
     const UNIQUE_ID                    = 0x8103;
-
+    
     // Non Storable Secure Information 0x80;
     const PIN                          = 0x8181;
     const CVC                          = 0x8182;
-
+    
     const IDENTIFICATION_TYPE_CI       = '0';
     const IDENTIFICATION_TYPE_PASSPORT = '1';
     const IDENTIFICATION_TYPE_OTHER    = '3';
     const IDENTIFICATION_TYPE_RUT      = '4';
-
+    
     private static $keys = [
         0x101 => 'Expiration',
         'Name',
@@ -101,6 +110,7 @@ class FieldType {
         'FirstName',
         'LastName',
         'City',
+        'State',
         0x0201 => 'Country',
         'ShippingAddress',
         'ShippingZipCode',
@@ -112,6 +122,11 @@ class FieldType {
         'DeferredMonths',
         'Plan',
         'RecurringPayment',
+        'IssuerId',
+        'PaymentLink',
+        'ShippingFirstName',
+        'ShippingLastName',
+        'ShippingPhoneNumber',
         0x401 => 'Provider',
         0x501 => 'SistarBancPaymentMethod',
         'RedPagosProductNumber',
@@ -122,6 +137,7 @@ class FieldType {
         'CybersourceDeviceFingerprint',
         'ClientIP',
         'IntegerId',
+        'RefundIntegerId',
         0x801 => 'ProviderCommerceNumber',
         'OcaTaxiCode',
         'TerminalNumber',
@@ -140,22 +156,23 @@ class FieldType {
         'PaymentFacilitatorId',
         'PaymentFacilitatorCommerceId',
         'PaymentFacilitatorIntegratorId',
+        'AvailableBanks',
         0x8101 => 'Pan',
         'Token',
         'UniqueId',
         0x8181 => 'Pin',
         'CVC',
     ];
-
+    
     private $param;
     private $value;
-
+    
     public function __construct($param, $value)
     {
         $this->param = is_string($param) ? self::nameToKey($param) : $param;
         $this->value = $value;
     }
-
+    
     /**
      *
      * @return int
@@ -164,7 +181,7 @@ class FieldType {
     {
         return $this->param;
     }
-
+    
     /**
      * @deprecated since version 0.3.4
      * @return string
@@ -177,7 +194,7 @@ class FieldType {
         }
         return self::$keys[$this->param];
     }
-
+    
     /**
      *
      * @return string
@@ -190,14 +207,15 @@ class FieldType {
         }
         return self::$keys[$this->param];
     }
-
+    
     public static function nameToKey($param)
     {
         return array_search($param, self::$keys);
     }
-
+    
     public function getValue()
     {
         return $this->value;
     }
 }
+

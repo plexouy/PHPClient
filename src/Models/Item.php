@@ -9,6 +9,9 @@ class Item extends ModelsBase// implements PlexoModelInterface
      * @var array List<InfoLine> $InfoLines
      * @var string $MetaData
      * @var array List<string> $Tags
+     * @var string $Description
+     * @var int $Quantity
+     * @var string $Name
      */
     protected $data = [
         'Amount' => null,
@@ -16,10 +19,13 @@ class Item extends ModelsBase// implements PlexoModelInterface
         'InfoLines' => [],
         'MetaData' => null,
         'Tags' => null,
+        'Description' => null,
+        'Quantity' => null,
+        'Name' => null,
     ];
-
+    
     /**
-     * 
+     *
      * @param array $params
      */
     public function __construct(array $params = []) {
@@ -27,7 +33,7 @@ class Item extends ModelsBase// implements PlexoModelInterface
             $this->data[$k] = $v;
         }
     }
-
+    
     public static function getValidationMetadata()
     {
         return [
@@ -51,15 +57,27 @@ class Item extends ModelsBase// implements PlexoModelInterface
                 'type' => 'array',
                 'required' => false,
             ],
+            'Description' => [
+                'type' => 'string',
+                'required' => false,
+            ],
+            'Quantity' => [
+                'type' => 'int',
+                'required' => false,
+            ],
+            'Name' => [
+                'type' => 'string',
+                'required' => false,
+            ],
         ];
     }
-
+    
     public function addInfoLine($infoLine)
     {
         array_push($this->data['InfoLines'], ($infoLine instanceof InfoLine ? $infoLine : InfoLine::fromArray($infoLine)));
         return $this;
     }
-
+    
     public function setInfoLines(array $infoLines)
     {
         $this->data['InfoLines'] = [];
@@ -68,19 +86,22 @@ class Item extends ModelsBase// implements PlexoModelInterface
         }
         return $this;
     }
-
+    
     public function toArray($canonize = false)
     {
         return [
             'Amount'                => is_null($this->Amount) ? null : ($canonize ? sprintf('float(%s)', (float) $this->Amount) : (float) $this->Amount),
             'ClientItemReferenceId' => $this->ClientItemReferenceId,
+            'Description' => $this->Description,
+            'Quantity' => $this->Quantity,
+            'Name' => $this->Name,
             'InfoLines'             => count($this->data['InfoLines'])
-                ? array_map(function ($infoLine) use ($canonize) {
-                    return ($infoLine instanceof InfoLine) ? $infoLine->toArray($canonize) : $infoLine;
-                }, $this->data['InfoLines'])
-                : null,
+            ? array_map(function ($infoLine) use ($canonize) {
+                return ($infoLine instanceof InfoLine) ? $infoLine->toArray($canonize) : $infoLine;
+            }, $this->data['InfoLines'])
+            : null,
             'MetaData'              => $this->MetaData,
             'Tags'                  => $this->Tags,
-        ];
+            ];
     }
 }

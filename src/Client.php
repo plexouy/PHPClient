@@ -5,7 +5,7 @@ use Psr\Log\NullLogger;
 
 class Client implements SecurePaymentGatewayInterface
 {
-    const VERSION = '0.6.2';
+    const VERSION = '1.4';
     const CREDENTIALS_FINGERPRINT     = 1;
     const CREDENTIALS_PEM_FINGERPRINT = 2;
     const CREDENTIALS_PFX_PASSPHRASE  = 3;
@@ -74,6 +74,22 @@ class Client implements SecurePaymentGatewayInterface
         return $this->_exec('POST', 'Auth', $auth);
     }
 
+    /**
+     * @param (array|\Plexo\Sdk\Models\ExpressCheckoutRequest) $expchk
+     * @return array
+     * @throws \Exception
+     */
+    public function ExpressCheckout($expchk)
+    {
+        if (is_array($expchk)) {
+            $expchk = Models\ExpressCheckoutRequest::fromArray($expchk);
+        }
+        if (!($expchk instanceof Models\ExpressCheckoutRequest)) {
+            throw new Exception\PlexoException('$$expchk debe ser del tipo array o \Plexo\Sdk\Models\ExpressCheckoutRequest');
+        }
+        return $this->_exec('POST', 'ExpressCheckout', $expchk);
+    }
+    
     /**
      *
      * @param (array|\Plexo\Sdk\Models\PaymentRequest) $payment

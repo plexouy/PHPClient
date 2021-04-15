@@ -46,7 +46,7 @@ class PaymentInstrumentInput extends ModelsBase
         return [
             'InstrumentToken' => [
                 'type' => 'string',
-                'required' => true,
+                'required' => false, //ExpressCheckout, otherwise is required
             ],
             'NonStorableItems' => [
                 'type' => 'array',
