@@ -17,7 +17,7 @@ class Client implements SecurePaymentGatewayInterface
 
     private static $env = [
         'test' => 'https://testing.plexo.com.uy:4043/SecurePaymentGateway.svc/',
-        'prod' => 'http://www.plexo.com.uy/plexoapi/SecurePaymentGateway.svc/',
+        'prod' => 'https://pagos.plexo.com.uy:4043/SecurePaymentGateway.svc/',
     ];
 
     /**
