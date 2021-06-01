@@ -15,7 +15,6 @@ class ExpressCheckoutRequest extends ModelsBase
     
     public static function getValidationMetadata()
     {
-        print_r("entrando a validate exprChk");
         return [
             'AuthorizationData' => [
                 'type' => 'class',
