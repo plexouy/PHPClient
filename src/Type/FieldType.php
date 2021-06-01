@@ -66,16 +66,17 @@ class FieldType {
     const COMMERCE_RESERVE_EXPIRATION_IN_SECONDS = 0x807;
     const SOFTDESCRIPTOR= 0x808;
     const MCC= 0x809;
-    const COMMERCECOUNTRY= 0x810;
-    const COMMERCECITY= 0x811;
-    const COMMERCERUT= 0x812;
-    const SUBCOMMERCEADDRESS= 0x813;
-    const AGGREGATORID= 0x814;
-    const SUBMERCHANTID= 0x815;
-    const PAYMENTFACILITATORID= 0x816;
-    const PAYMENTFACILITATORCOMMERCEID= 0x817;
-    const PAYMENTFACILITATORINTEGRATORID= 0x818;
-    const AVAILABLEBANKS= 0x819;
+    const COMMERCECOUNTRY= 0x80A;
+    const COMMERCECITY= 0x80B;
+    const COMMERCERUT= 0x80C;
+    const SUBCOMMERCEADDRESS= 0x80D;
+    const AGGREGATORID= 0x80E;
+    const SUBMERCHANTID= 0x80F;
+    const PAYMENTFACILITATORID= 0x810;
+    const PAYMENTFACILITATORCOMMERCEID= 0x811;
+    const PAYMENTFACILITATORINTEGRATORID= 0x812;
+    const AVAILABLEBANKS= 0x813;
+    const COMMERCEISSUERINSTALLMENTS= 0x814;
     
     // Secure Information Starts at 0x8100. Private Flag | User Flag
     // Secure User Generic Information
@@ -157,6 +158,7 @@ class FieldType {
         'PaymentFacilitatorCommerceId',
         'PaymentFacilitatorIntegratorId',
         'AvailableBanks',
+        'CommerceIssuerInstallments',
         0x8101 => 'Pan',
         'Token',
         'UniqueId',
