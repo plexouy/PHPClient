@@ -21,7 +21,7 @@ Para correr el SDK, su sistema debe contar con **PHP >= 5.6** compilado con el m
 Instalando el SDK vía Composer.
 
 ```bash
-$ composer require plexouy/plexo-sdk
+$ composer require plexophp/php-sdk
 ```
 
 ## Certificados
