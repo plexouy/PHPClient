@@ -7,22 +7,25 @@ class Authorization extends ModelsBase
 {
     /**
      * @var int $Action              Action type defined in Plexo\Sdk\Type\ActionType
-     * @var int $Type                Authorization type defined in Sdk\Type\AuthorizationType 
-     * @var string $MetaReference 
+     * @var int $Type                Authorization type defined in Sdk\Type\AuthorizationType
+     * @var string $MetaReference
      * @var string $RedirectUri
-     * @var string $OptionalMetadata (Optional) 
+     * @var string $OptionalMetadata (Optional)
      * @var array <string, object> $ClientInformation (Optional) Sdk\Type\FieldType's list
-     * @var array <string> $LimitIssuers  (Optional) 
-     * @var Dictionary<string, string> $PromotionInfoIssuers (Optional)  
-     * @var string $ExtendableInstrumentToken (Optional) 
+     * @var array <string> LimitBanks  (Optional)
+     * @var array <string> $LimitIssuers  (Optional)
+     * @var Dictionary<string, string> $PromotionInfoIssuers (Optional)
+     * @var string $ExtendableInstrumentToken (Optional)
      * @var bool $DoNotUseCallback Default false
+     * @var WebFormSettingsDto $WebFormSettings
      */
-
+    
     protected $data = [
         'Action' => null,
         'ClientInformation' => null,
         'DoNotUseCallback' => false,
         'ExtendableInstrumentToken' => null,
+        'LimitBanks' => null,
         'LimitIssuers' => null,
         'MetaReference' => null,
         'OptionalCommerceId' => null,
@@ -30,8 +33,9 @@ class Authorization extends ModelsBase
         'PromotionInfoIssuers' => null,
         'RedirectUri' => null,
         'Type' => null,
+        'WebFormSettings' => null,
     ];
-
+    
     public static function getValidationMetadata()
     {
         return [
@@ -47,10 +51,10 @@ class Authorization extends ModelsBase
                 'type' => 'string',
                 'required' => false,
             ],
-           'RedirectUri' => [
+            'RedirectUri' => [
                 'type' => 'string',
                 'required' => true,
-           ],
+            ],
             'OptionalCommerceId' => [
                 'type' => 'int',
                 'required' => false,
@@ -67,6 +71,10 @@ class Authorization extends ModelsBase
                 'type' => 'bool',
                 'required' => false,
             ],
+            'LimitBanks' => [
+                'type' => 'array',
+                'required' => false,
+            ],
             'LimitIssuers' => [
                 'type' => 'array',
                 'required' => false,
@@ -79,15 +87,20 @@ class Authorization extends ModelsBase
                 'type' => 'string',
                 'required' => false,
             ],
+            'WebFormSettings' => [
+                'type' => 'class',
+                'class' => 'WebFormSettingsDto',
+                'required' => false,
+            ],
         ];
     }
-
+    
     public function addClientInformationField($value, $k = null)
     {
         array_push($this->data['ClientInformation'], ($value instanceof Type\FieldType ? $value : new Type\FieldType($k, $value)));
         return $this;
     }
-
+    
     public function setClientInformation(array $value)
     {
         $this->data['ClientInformation'] = [];
@@ -96,7 +109,7 @@ class Authorization extends ModelsBase
         }
         return $this;
     }
-
+    
     public function clientInformationToArray()
     {
         if (!is_array($this->data['ClientInformation']) || count($this->data['ClientInformation']) === 0) {
@@ -109,7 +122,7 @@ class Authorization extends ModelsBase
         ksort($hash);
         return $hash;
     }
-
+    
     public function promotionInfoIssuersToArray()
     {
         if (!is_array($this->data['PromotionInfoIssuers']) || count($this->data['PromotionInfoIssuers']) === 0) {
@@ -122,12 +135,21 @@ class Authorization extends ModelsBase
         ksort($hash);
         return $hash;
     }
-
+    
+    public function setWebFormSettings($value)
+    {
+        $this->data['WebFormSettings'] = WebFormSettingsDto::fromArray($value);
+        return $this;
+    }
+    
     public function toArray($canonize = false)
     {
         $arr = $this->data;
         $arr['ClientInformation'] = $this->clientInformationToArray();
         $arr['PromotionInfoIssuers'] = $this->promotionInfoIssuersToArray();
+        if (!is_null($arr['WebFormSettings'])) {
+            $arr['WebFormSettings'] = $arr['WebFormSettings']->toArray($canonize);
+        }
         return $arr;
     }
 }
