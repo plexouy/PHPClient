@@ -30,7 +30,8 @@ $client = new Sdk\Client();
 try {
     $response = $client->Cancel([
         'Type' => Type\ReferenceType::PLEXO_TRANSACTION_ID,
-        'ClientReferenceId' => '123456'
+        'ClientReferenceId' => '123456',
+        'MetaReference' => 'f69f11ac34ea44ea894316a96ca19agb'
     ]);
 } catch (Sdk\Exception\PlexoException $exc) {
     printf("[%s] (%d) %s\n", get_class($exc), $exc->getCode(), $exc->getMessage());
