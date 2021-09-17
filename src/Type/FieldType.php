@@ -54,6 +54,7 @@ class FieldType {
     const CLIENT_IP                      = 0x508;
     const INTEGER_ID                     = 0x509;
     const REFUNDINTEGER_ID               = 0x50A;
+    const RESERVEINTEGER_ID              = 0x50B;
     
     
     // Commerce Related Information starts at 0x800
@@ -77,6 +78,7 @@ class FieldType {
     const PAYMENTFACILITATORINTEGRATORID= 0x812;
     const AVAILABLEBANKS= 0x813;
     const COMMERCEISSUERINSTALLMENTS= 0x814;
+    const PAYMENTPROCESSORID= 0x815;
     
     // Secure Information Starts at 0x8100. Private Flag | User Flag
     // Secure User Generic Information
@@ -139,6 +141,7 @@ class FieldType {
         'ClientIP',
         'IntegerId',
         'RefundIntegerId',
+        'ReserveIntegerId',
         0x801 => 'ProviderCommerceNumber',
         'OcaTaxiCode',
         'TerminalNumber',
@@ -159,6 +162,7 @@ class FieldType {
         'PaymentFacilitatorIntegratorId',
         'AvailableBanks',
         'CommerceIssuerInstallments',
+        'PaymentProcessorId',
         0x8101 => 'Pan',
         'Token',
         'UniqueId',

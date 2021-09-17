@@ -227,6 +227,19 @@ class Client implements SecurePaymentGatewayInterface
         }
         return new Models\PaymentInstrument($this->_exec('POST', 'Instruments/Bank', $request));
     }
+    
+    /**
+     * @since 1.4.3
+     * @param \Plexo\Sdk\Message\CreateBankInstrumentRequest $request
+     * @return \Plexo\Sdk\PaymentInstrument
+     */
+    public function AddInstrument($request)
+    {
+        if (is_array($request)) {
+            $request = Models\CreateBankInstrumentRequest::fromArray($request);
+        }
+        return new Models\PaymentInstrument($this->_exec('POST', 'Instruments/Add', $request));
+    }
 
     // Issuers
 
