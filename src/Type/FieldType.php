@@ -39,6 +39,7 @@ class FieldType {
     const SHIPPINGFIRSTNAME     = 0x020E;
     const SHIPPINGLASTNAME      = 0x020F;
     const SHIPPINGPHONENUMBER   = 0x0210;
+    const INTERNALPAYMENTCALLBACK = 0x0211;
     
     // Provider Related Information starts at 0x400
     const PROVIDER                     = 0x401;// Example Visa
@@ -55,6 +56,7 @@ class FieldType {
     const INTEGER_ID                     = 0x509;
     const REFUNDINTEGER_ID               = 0x50A;
     const RESERVEINTEGER_ID              = 0x50B;
+    const BANK_ID                        = 0x50C;
     
     
     // Commerce Related Information starts at 0x800
@@ -130,6 +132,7 @@ class FieldType {
         'ShippingFirstName',
         'ShippingLastName',
         'ShippingPhoneNumber',
+        'InternalPaymentCallback',
         0x401 => 'Provider',
         0x501 => 'SistarBancPaymentMethod',
         'RedPagosProductNumber',
@@ -142,6 +145,7 @@ class FieldType {
         'IntegerId',
         'RefundIntegerId',
         'ReserveIntegerId',
+        'BankId',
         0x801 => 'ProviderCommerceNumber',
         'OcaTaxiCode',
         'TerminalNumber',
