@@ -12,11 +12,11 @@ class DisplayOptionsDto extends ModelsBase
      */
     
     protected $data = [
-        'Accessibility' => false,
-        'Details' => false,
-        'Footer' => false,
-        'Logo' => false,
-        'Titles' => false,
+        'Accessibility' => null,
+        'Details' => null,
+        'Footer' => null,
+        'Logo' => null,
+        'Titles' => null,
     ];
     
     public static function getValidationMetadata()
@@ -42,6 +42,17 @@ class DisplayOptionsDto extends ModelsBase
                 'type' => 'bool',
                 'required' => false,
             ],
+        ];
+    }
+    
+    public function toArray($canonize = false)
+    {
+        return [
+            'Accessibility' => $this->data['Accessibility'],
+            'Details' => $this->data['Details'],
+            'Footer' => $this->data['Footer'],
+            'Logo' => $this->data['Logo'],
+            'Titles' => $this->data['Titles'],
         ];
     }
 }
