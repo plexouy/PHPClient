@@ -12,7 +12,7 @@ class UIOptionsDto extends ModelsBase
     
     protected $data = [
         
-        'AutoDarkTheme' => false,
+        'AutoDarkTheme' => null,
         'Colors' => null,
         'LogoURL' => null,
         'Theme' => null,
@@ -38,5 +38,16 @@ class UIOptionsDto extends ModelsBase
                 'required' => false,
             ],
         ];
+    }
+    
+    public function toArray($canonize = false)
+    {
+        return [
+            'AutoDarkTheme' => $this->data['AutoDarkTheme'],
+            'Colors' => $this->data['Colors'],
+            'LogoURL' => $this->data['LogoURL'],
+            'Theme' => $this->data['Theme'],
+        ];
+        
     }
 }
