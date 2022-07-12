@@ -15,8 +15,8 @@
     "test": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests"
   },
   "require": {
-    "php": ">=5.6.0",
-    "guzzlehttp/guzzle": "^6.3",
+    "php": ">=8.0",
+    "guzzlehttp/guzzle": "^7.3.0",
     "psr/log": "^1.0"
   },
   "require-dev": {
