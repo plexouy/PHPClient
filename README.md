@@ -7,7 +7,7 @@ complejidad asociada a la integración con los medios de pago.
 
 ## Requerimientos
 
-Para correr el SDK, su sistema debe contar con **PHP >= 8** compilado con el módulo openssl.
+Para correr el SDK, su sistema debe contar con **PHP >= 7.4** compilado con el módulo openssl.
 
 ## Primeros pasos
 
