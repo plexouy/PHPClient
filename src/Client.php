@@ -9,17 +9,17 @@ class Client implements SecurePaymentGatewayInterface
     const CREDENTIALS_FINGERPRINT     = 1;
     const CREDENTIALS_PEM_FINGERPRINT = 2;
     const CREDENTIALS_PFX_PASSPHRASE  = 3;
-
+    
     private $http_client;
     private $config;
     private $serverCert;
     private $logger;
-
+    
     private static $env = [
         'test' => 'https://testing.plexo.com.uy:4043/SecurePaymentGateway.svc/',
         'prod' => 'https://pagos.plexo.com.uy:4043/SecurePaymentGateway.svc/',
     ];
-
+    
     /**
      *
      * @param array $options
@@ -42,7 +42,7 @@ class Client implements SecurePaymentGatewayInterface
         ]);
         $this->logger->debug('Constructor options', $this->config);
     }
-
+    
     /**
      * @since 0.3.0
      * @param null|LoggerInterface $logger
@@ -54,9 +54,9 @@ class Client implements SecurePaymentGatewayInterface
         }
         $this->logger = $logger;
     }
-
+    
     // Operations
-
+    
     /**
      *
      * @param (array|\Plexo\Sdk\Models\Authorization) $auth
@@ -73,7 +73,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return $this->_exec('POST', 'Auth', $auth);
     }
-
+    
     /**
      * @param (array|\Plexo\Sdk\Models\ExpressCheckoutRequest) $expchk
      * @return array
@@ -105,7 +105,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return $this->_exec('POST', 'Operation/Purchase', $payment);
     }
-
+    
     public function Cancel($payment)
     {
         if (is_array($payment)) {
@@ -116,7 +116,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return $this->_exec('POST', 'Operation/Cancel', $payment);
     }
-
+    
     /**
      * @since 0.6.0
      * @return \Plexo\Sdk\Models\Transaction
@@ -131,7 +131,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return new Models\Transaction($this->_exec('POST', 'Operation/Refund', $payment));
     }
-
+    
     /**
      * @param array $payment
      * @return \Plexo\Sdk\Models\Transaction
@@ -141,9 +141,9 @@ class Client implements SecurePaymentGatewayInterface
         if (is_array($payment)) {
             $payment = Models\ReserveRequest::fromArray($payment);
         }
-        return new Models\Transaction($this->_exec('POST', 'Operation/StartReserve', $payment));
+        return $this->_exec('POST', 'Operation/StartReserve', $payment);
     }
-
+    
     public function EndReserve($reserve)
     {
         if (is_array($reserve)) {
@@ -151,7 +151,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return $this->_exec('POST', 'Operation/EndReserve', $reserve);
     }
-
+    
     public function Status($payment)
     {
         if (is_array($payment)) {
@@ -159,9 +159,9 @@ class Client implements SecurePaymentGatewayInterface
         }
         return $this->_exec('POST', 'Operation/Status', $payment);
     }
-
+    
     // Blacklist
-
+    
     /**
      * @since 0.6.0
      * @return null
@@ -173,7 +173,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return $this->_exec('POST', 'Blacklist/Add', $request);
     }
-
+    
     /**
      * @since 0.6.0
      * @return null
@@ -185,7 +185,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return $this->_exec('POST', 'Blacklist/Delete', $request);
     }
-
+    
     /**
      * @since 0.6.0
      * @return Plexo\Sdk\Models\BlacklistRequest[]
@@ -196,9 +196,9 @@ class Client implements SecurePaymentGatewayInterface
             return Models\BlacklistRequest::fromArray($item);
         }, $this->_exec('POST', 'Blacklist'));
     }
-
+    
     // Instruments
-
+    
     public function GetInstruments($info)
     {
         if (is_array($info)) {
@@ -206,7 +206,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return $this->_exec('POST', 'Instruments', $info);
     }
-
+    
     public function DeleteInstrument($info)
     {
         if (is_array($info)) {
@@ -214,7 +214,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return $this->_exec('POST', 'Instruments/Delete', $info);
     }
-
+    
     /**
      * @since 0.3.0
      * @param \Plexo\Sdk\Message\CreateBankInstrumentRequest $request
@@ -240,16 +240,16 @@ class Client implements SecurePaymentGatewayInterface
         }
         return new Models\PaymentInstrument($this->_exec('POST', 'Instruments/Add', $request));
     }
-
+    
     // Issuers
-
+    
     public function GetSupportedIssuers()
     {
         return $this->_exec('POST', 'Issuer');
     }
-
+    
     // Commerces
-
+    
     /**
      * @return array
      */
@@ -260,7 +260,7 @@ class Client implements SecurePaymentGatewayInterface
             return Models\Commerce::fromArray($item);
         }, $commerces);
     }
-
+    
     /**
      * @param array $commerce
      * @return \Plexo\Sdk\Models\Commerce
@@ -273,7 +273,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return Models\Commerce::fromArray($this->_exec('POST', 'Commerce/Add', $commerce));
     }
-
+    
     /**
      * @param array $commerce
      * @return \Plexo\Sdk\Models\Commerce
@@ -285,7 +285,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return Models\Commerce::fromArray($this->_exec('POST', 'Commerce/Modify', $commerce));
     }
-
+    
     /**
      * @param array $commerce
      * @return void
@@ -298,7 +298,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return $this->_exec('POST', 'Commerce/Delete', $commerce);
     }
-
+    
     /**
      * @param array $commerce
      * @return void
@@ -311,7 +311,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return $this->_exec('POST', 'Commerce/SetDefault', $commerce);
     }
-
+    
     public function GetCommerceIssuers($commerce)
     {
         if (is_array($commerce)) {
@@ -323,7 +323,7 @@ class Client implements SecurePaymentGatewayInterface
             return new Models\IssuerData($issuer);
         }, $issuers);
     }
-
+    
     public function AddIssuerCommerce($commerce)
     {
         if (is_array($commerce)) {
@@ -331,7 +331,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return new Models\IssuerData($this->_exec('POST', 'Commerce/Issuer/Add', $commerce));
     }
-
+    
     /**
      * @param array $commerce
      * @return void
@@ -344,7 +344,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return $this->_exec('POST', 'Commerce/Issuer/Delete', $commerce);
     }
-
+    
     /**
      *
      * @param array $commerce
@@ -358,9 +358,9 @@ class Client implements SecurePaymentGatewayInterface
         }
         return Models\Commerce::fromArray($this->_exec('POST', 'Commerce/GetProvidedCodeCommerce', $commerce));
     }
-
+    
     // TransactionInfo
-
+    
     /**
      * @since 0.3.0
      * @param (array|\Plexo\Models\TransactionQuery) $query
@@ -378,7 +378,7 @@ class Client implements SecurePaymentGatewayInterface
         return $this->_exec('POST', 'Transactions', $query);
         // return new Models\TransactionCursor($this->_exec('POST', 'Transactions', $query));
     }
-
+    
     /**
      * @since 0.3.0
      * @param (array|\Plexo\Sdk\Models\TransactionQuery) $query
@@ -395,9 +395,9 @@ class Client implements SecurePaymentGatewayInterface
         }
         return $this->_exec('POST', 'Transactions/CSV', $query);
     }
-
+    
     // Public Key
-
+    
     /**
      *
      * @param string $fingerprint
@@ -411,9 +411,9 @@ class Client implements SecurePaymentGatewayInterface
         $path = sprintf("Key/%s", $fingerprint);
         return $this->_exec('GET', $path);
     }
-
+    
     // VerificationCodes
-
+    
     /**
      * @since 0.3.0
      * @param (array|Plexo\Sdk\Models\CodeRequest) $request
@@ -430,7 +430,7 @@ class Client implements SecurePaymentGatewayInterface
         }
         return new Models\Transaction($this->_exec('POST', 'Code', new IssuerSignedRequest($request)));
     }
-
+    
     private function configureDefaults(array $config)
     {
         $defaults = [
@@ -477,7 +477,7 @@ class Client implements SecurePaymentGatewayInterface
             $this->config['pkey'] = self::CREDENTIALS_PFX_PASSPHRASE;
         }
     }
-
+    
     private function _getClientName()
     {
         if (!array_key_exists('client', $this->config) || empty($this->config['client'])) {
@@ -486,7 +486,7 @@ class Client implements SecurePaymentGatewayInterface
         $this->logger->info('Using client ', array('client' => $this->config['client']));
         return $this->config['client'];
     }
-
+    
     private function _getIssuerName()
     {
         if (!array_key_exists('issuer', $this->config) || empty($this->config['issuer'])) {
@@ -495,7 +495,7 @@ class Client implements SecurePaymentGatewayInterface
         $this->logger->info('Using issuer ', array('issuer' => $this->config['issuer']));
         return $this->config['issuer'];
     }
-
+    
     /**
      *
      * @param string $http_method
@@ -540,10 +540,10 @@ class Client implements SecurePaymentGatewayInterface
         $body = (string) $res->getBody();
         $this->logger->debug('Response body', [$body]);
         $response_obj = json_decode($body, true);
-
+        
         $certificateStore = Registry::contains('CertificateProvider')
-            ? Registry::get('CertificateProvider')
-            : Certificate\CertificateProvider::instance();
+        ? Registry::get('CertificateProvider')
+        : Certificate\CertificateProvider::instance();
         if (!($certificateStore instanceof Certificate\CertificateProviderInterface)) {
             throw new Exception\PlexoException(sprintf('%s debe implementar la interfaz Plexo\Sdk\Certificate\CertificateProviderInterface.', get_class($certificateStore)));
         }
@@ -568,7 +568,7 @@ class Client implements SecurePaymentGatewayInterface
         $response = $signedResponse->getMessage();
         return array_key_exists('Response', $response) ? $response['Response'] : null;
     }
-
+    
     private function getCert()
     {
         switch ($this->config['pkey']) {

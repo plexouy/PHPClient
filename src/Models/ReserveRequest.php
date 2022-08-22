@@ -1,7 +1,7 @@
 <?php
 namespace Plexo\Sdk\Models;
 
-use Plexo\Sdk;
+use Plexo\Sdk\Type;
 
 class ReserveRequest extends ModelsBase
 {
@@ -9,11 +9,11 @@ class ReserveRequest extends ModelsBase
      * @var int $ExpirationUTC
      * @var string $ClientReferenceId
      * @var PaymentInstrumentInput $PaymentInstrumentInput
-     * @var array(Item) $Items
+     * @var Item[] $Items
      * @var int $CurrencyId
      * @var int $Installments
      * @var FinancialInclusion $FinancialInclusion
-     * @var decimal $TipAmount (Opcional)
+     * @var float $TipAmount (Opcional)
      * @var int $OptionalCommerceId (Opcional)
      * @var string $OptionalMetadata
      */
@@ -30,6 +30,56 @@ class ReserveRequest extends ModelsBase
         'PaymentInstrumentInput' => null,
         'TipAmount' => null,
     ];
+    
+    public static function getValidationMetadata()
+    {
+        return [
+            'ClientReferenceId' => [
+                'type' => 'string',
+                'required' => false,
+            ],
+            'PaymentInstrumentInput' => [
+                'type' => 'class',
+                'class' => 'PaymentInstrumentInput',
+                'required' => true,
+            ],
+            'Items' => [
+                'type' => 'class',
+                'class' => 'Item',
+                'array' => true,
+                'required' => true,
+            ],
+            'CurrencyId' => [
+                'type' => 'int',
+                'required' => true,
+            ],
+            'ExpirationUTC' => [
+                'type' => 'int',
+                'required' => true,
+            ],
+            'Installments' => [
+                'type' => 'int',
+                'required' => true,
+            ],
+            'FinancialInclusion' => [
+                'type' => 'class',
+                'class' => 'FinancialInclusion',
+                'required' => false,
+            ],
+            'TipAmount' => [
+                'type' => 'float',
+                'required' => false,
+            ],
+            'OptionalCommerceId' => [
+                'type' => 'int',
+                'required' => false,
+            ],
+            'OptionalMetadata' => [
+                'type' => 'string',
+                'required' => false,
+            ],
+        ];
+    }
 
     public function addItem($item)
     {
@@ -54,7 +104,13 @@ class ReserveRequest extends ModelsBase
 
     public function setPaymentInstrumentInput($value)
     {
-        $this->data['PaymentInstrumentInput'] = ($value instanceof PaymentInstrumentInput ? $value : new PaymentInstrumentInput($value));
+        if (is_array($value)) {
+            $value = PaymentInstrumentInput::fromArray($value);
+        }
+        if (!($value instanceof PaymentInstrumentInput)) {
+            throw new \Plexo\Sdk\Exception\InvalidArgumentException('PaymentInstrumentInput debe ser del tipo \\Plexo\\Sdk\\Models\\PaymentInstrumentInput o un array compatible.');
+        }
+        $this->data['PaymentInstrumentInput'] = $value;
         return $this;
     }
 
@@ -73,7 +129,7 @@ class ReserveRequest extends ModelsBase
         return $inst;
     }
 
-    public function toArray($canonize = false)
+   /* public function toArray($canonize = false)
     {
         $arr = $this->data;
         if ($this->data['Items']) {
@@ -87,6 +143,31 @@ class ReserveRequest extends ModelsBase
         if ($arr['PaymentInstrumentInput']) {
             $arr['PaymentInstrumentInput'] = $arr['PaymentInstrumentInput']->toArray($canonize);
         }
+        return $arr;
+    }*/
+    public function toArray($canonize = false)
+    {
+        $arr = $this->data;
+        if (!is_null($arr['FinancialInclusion'])) {
+            $arr['FinancialInclusion'] = $arr['FinancialInclusion']->toArray($canonize);
+        }
+        if (!is_null($arr['PaymentInstrumentInput'])) {
+            $arr['PaymentInstrumentInput'] = $arr['PaymentInstrumentInput']->toArray($canonize);
+        }
+        if ($canonize) {
+            if (!is_null($arr['TipAmount'])) {
+                $arr['TipAmount'] = sprintf('float(%s)', (float) $arr['TipAmount']);
+            }
+        }
+        if ($this->data['Items']) {
+            $arr['Items'] = array_map(function ($item) use ($canonize) {
+                return ($item instanceof Item) ? $item->toArray($canonize) : $item;
+            }, $this->data['Items']);
+        }
+        //return array_filter($this->data, function ($v, $k) use ($scheme) {
+        //    return ($scheme[$k]['required'] && !is_null($v));
+        //}, ARRAY_FILTER_USE_BOTH);
+        //        $scheme = self::getValidationMetadata();
         return $arr;
     }
 }

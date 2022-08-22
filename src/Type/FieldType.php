@@ -40,6 +40,8 @@ class FieldType {
     const SHIPPINGLASTNAME      = 0x020F;
     const SHIPPINGPHONENUMBER   = 0x0210;
     const INTERNALPAYMENTCALLBACK = 0x0211;
+    const CUSTOMINVOICENUMBER   = 0x0212;
+    const VATAMOUNT             = 0x0213;
     
     // Provider Related Information starts at 0x400
     const PROVIDER                     = 0x401;// Example Visa
@@ -81,6 +83,11 @@ class FieldType {
     const AVAILABLEBANKS= 0x813;
     const COMMERCEISSUERINSTALLMENTS= 0x814;
     const PAYMENTPROCESSORID= 0x815;
+    const LOANPAYBACKDATE = 0x816;
+    const LOANFEEAMOUNT= 0x817;
+    const FINGERPRINTORGID= 0x818;
+    const FINGERPRINTSESSID= 0x819;
+    
     
     // Secure Information Starts at 0x8100. Private Flag | User Flag
     // Secure User Generic Information
@@ -133,6 +140,8 @@ class FieldType {
         'ShippingLastName',
         'ShippingPhoneNumber',
         'InternalPaymentCallback',
+        'CustomInvoiceNumber',
+        'VATAmount',
         0x401 => 'Provider',
         0x501 => 'SistarBancPaymentMethod',
         'RedPagosProductNumber',
@@ -167,6 +176,10 @@ class FieldType {
         'AvailableBanks',
         'CommerceIssuerInstallments',
         'PaymentProcessorId',
+        'LoanPaybackDate',
+        'LoanFeeAmount',
+        'FingerprintOrgID',
+        'FingerprintSessID',
         0x8101 => 'Pan',
         'Token',
         'UniqueId',
