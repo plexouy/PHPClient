@@ -44,7 +44,7 @@ class FieldType {
     const VATAMOUNT             = 0x0213;
     const CROSSBANKTRANSFERS    = 0x0214;
     const SOURCEBANK            = 0x0215;
-    const DESTINATIONBANK       = 0x0215;
+    const DESTINATIONBANK       = 0x0216;
     
     // Provider Related Information starts at 0x400
     const PROVIDER                     = 0x401;// Example Visa
