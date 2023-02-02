@@ -42,6 +42,9 @@ class FieldType {
     const INTERNALPAYMENTCALLBACK = 0x0211;
     const CUSTOMINVOICENUMBER   = 0x0212;
     const VATAMOUNT             = 0x0213;
+    const CROSSBANKTRANSFERS    = 0x0214;
+    const SOURCEBANK            = 0x0215;
+    const DESTINATIONBANK       = 0x0215;
     
     // Provider Related Information starts at 0x400
     const PROVIDER                     = 0x401;// Example Visa
@@ -142,6 +145,9 @@ class FieldType {
         'InternalPaymentCallback',
         'CustomInvoiceNumber',
         'VATAmount',
+        'CrossBankTransfers',
+        'SourceBank',
+        'DestinationBank',
         0x401 => 'Provider',
         0x501 => 'SistarBancPaymentMethod',
         'RedPagosProductNumber',
