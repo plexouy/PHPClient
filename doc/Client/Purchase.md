@@ -45,7 +45,7 @@ try {
             'BilledAmount' => 100,
             'InvoiceNumber' => 10019,
             'TaxedAmount' => 100,
-        ]),
+        ],
         'Installments' => 3,
         'Items' => [
             [
