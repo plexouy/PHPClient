@@ -90,6 +90,8 @@ class FieldType {
     const LOANFEEAMOUNT= 0x817;
     const FINGERPRINTORGID= 0x818;
     const FINGERPRINTSESSID= 0x819;
+    const VOIDCVVVALIDATION= 0x81A;
+    const KOUNTMERCHANTID= 0x81B;
     
     
     // Secure Information Starts at 0x8100. Private Flag | User Flag
@@ -186,6 +188,8 @@ class FieldType {
         'LoanFeeAmount',
         'FingerprintOrgID',
         'FingerprintSessID',
+        'VoidCVVValidation',
+        'KountMerchantId',
         0x8101 => 'Pan',
         'Token',
         'UniqueId',
