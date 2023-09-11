@@ -92,6 +92,9 @@ class FieldType {
     const FINGERPRINTSESSID= 0x819;
     const VOIDCVVVALIDATION= 0x81A;
     const KOUNTMERCHANTID= 0x81B;
+    const SUBCOMMERCELEGALNAME= 0x81C;
+    const SUBCOMMERCESTATE= 0x81D;
+    const SUBCOMMERCEPOSTALCODE= 0x81E;
     
     
     // Secure Information Starts at 0x8100. Private Flag | User Flag
@@ -190,6 +193,10 @@ class FieldType {
         'FingerprintSessID',
         'VoidCVVValidation',
         'KountMerchantId',
+        'SubCommerceLegalName',
+        'SubCommerceState',
+        'SubCommercePostalCode',
+        
         0x8101 => 'Pan',
         'Token',
         'UniqueId',
