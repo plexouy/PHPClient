@@ -95,6 +95,10 @@ class FieldType {
     const SUBCOMMERCELEGALNAME= 0x81C;
     const SUBCOMMERCESTATE= 0x81D;
     const SUBCOMMERCEPOSTALCODE= 0x81E;
+    const BUYERFEEAMOUNT= 0x81F;
+    const ISSUERFEEAMOUNT= 0x820;
+    const TAXDISCOUNTAMOUNT= 0x821;
+    const TAXDISCOUNTLAW= 0x822;
     
     
     // Secure Information Starts at 0x8100. Private Flag | User Flag
@@ -196,7 +200,10 @@ class FieldType {
         'SubCommerceLegalName',
         'SubCommerceState',
         'SubCommercePostalCode',
-        
+        'BuyerFeeAmount',
+        'IssuerFeeAmount',
+        'TaxDiscountAmount',
+        'TaxDiscountLaw',
         0x8101 => 'Pan',
         'Token',
         'UniqueId',

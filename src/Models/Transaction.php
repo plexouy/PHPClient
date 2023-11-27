@@ -86,6 +86,7 @@ class Transaction extends ModelsBase
      * @var Dictionary<FieldType, string>
      */
     public $FieldInformation;
+    
 
     public function __construct($data = null)
     {
@@ -99,7 +100,6 @@ class Transaction extends ModelsBase
         $this->Currency = new Currency($data['Currency']);
         $this->IsAnonymous = $data['IsAnonymous'];
         $this->CurrentState = $data['CurrentState'];
-//        $this->CurrentState = new TransactionType($data['CurrentState']);
         $this->InvoiceNumber = $data['InvoiceNumber'];
         $this->FinancialInclusion = new FinancialInclusionResult($data['FinancialInclusion']);
         $this->Transactions = $data['Transactions'];

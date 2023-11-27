@@ -18,6 +18,7 @@ class Authorization extends ModelsBase
      * @var string $ExtendableInstrumentToken (Optional)
      * @var bool $DoNotUseCallback Default false
      * @var WebFormSettingsDto $WebFormSettings
+     * @var bool $ExtendedBINInformation Default false
      */
     
     protected $data = [
@@ -34,6 +35,7 @@ class Authorization extends ModelsBase
         'RedirectUri' => null,
         'Type' => null,
         'WebFormSettings' => null,
+        'ExtendedBINInformation' => false,
     ];
     
     public static function getValidationMetadata()
@@ -90,6 +92,10 @@ class Authorization extends ModelsBase
             'WebFormSettings' => [
                 'type' => 'class',
                 'class' => 'WebFormSettingsDto',
+                'required' => false,
+            ],
+            'ExtendedBINInformation' => [
+                'type' => 'bool',
                 'required' => false,
             ],
         ];

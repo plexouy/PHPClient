@@ -21,4 +21,13 @@ class ExpressCheckoutSettingsDto extends ModelsBase
             ],
         ];
     }
+    
+    public function toArray($canonize = false)
+    {
+        return
+        [
+            'Display'=>$this->data['Display']? $this->data['Display']->toArray($canonize):null
+        ];
+    }
+    
 }
