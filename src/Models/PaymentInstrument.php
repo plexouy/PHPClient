@@ -15,6 +15,8 @@ class PaymentInstrument extends ModelsBase
      * @var array<TimeLimit> $AdditionalRequirements
      * @var array<FieldType,string> $InstrumentInformation
      * @var string $SessionCreationId
+     * @var string $BinInformation
+     * @var string $Country
      */
 
     protected $data = [
@@ -29,6 +31,8 @@ class PaymentInstrument extends ModelsBase
         'AdditionalRequirements' => null,
         'InstrumentInformation' => null,
         'SessionCreationId' => null,
+        'BinInformation' => null,
+        'Country' => null,
     ];
 
     public static function getValidationMetadata()
@@ -82,6 +86,14 @@ class PaymentInstrument extends ModelsBase
                 'required' => false,
             ],
             'SessionCreationId' => [
+                'type' => 'string',
+                'required' => false,
+            ],
+            'BinInformation' => [
+                'type' => 'string',
+                'required' => false,
+            ],
+            'Country' => [
                 'type' => 'string',
                 'required' => false,
             ],
@@ -171,6 +183,8 @@ class PaymentInstrument extends ModelsBase
                     return $currency->toArray($canonize);
                 }, $this->data['SupportedCurrencies'])
                 : [],
+            'BinInformation' => $this->data['BinInformation'],
+            'Country' => $this->data['Country'],
         ];
     }
 }
