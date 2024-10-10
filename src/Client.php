@@ -106,6 +106,22 @@ class Client implements SecurePaymentGatewayInterface
         return $this->_exec('POST', 'Operation/Purchase', $payment);
     }
     
+    /**
+     *
+     * @param (array|\Plexo\Sdk\Models\ThreeDSRequest) $threeDS
+     * @return \stdClass
+     */
+    public function ThreeDSValidate($threeDS)
+    {
+        if (is_array($threeDS)) {
+            $threeDS = Models\ThreeDSRequest::fromArray($threeDS);
+        }
+        if (!($threeDS instanceof Models\ThreeDSRequest)) {
+            throw new \Exception('$payment debe ser del tipo array o \Plexo\Sdk\Models\ThreeDSRequest');// FIXME
+        }
+        return $this->_exec('POST', '3DSValidation', $threeDS);
+    }
+    
     public function Cancel($payment)
     {
         if (is_array($payment)) {
