@@ -32,6 +32,7 @@ class PaymentRequest extends ModelsBase
         'OptionalProvidedCode' => null,
         'PaymentInstrumentInput' => null,
         'TipAmount' => null,
+        'ThreeDSReferenceId'=> null,
     ];
 
 //    public static function loadValidatorMetadata(\Symfony\Component\Validator\Mapping\ClassMetadata $metadata)
