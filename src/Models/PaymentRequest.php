@@ -17,6 +17,7 @@ class PaymentRequest extends ModelsBase
      * @var string $OptionalMetadata
      * @var string $OptionalProvidedCode
      * @var string $OptionalExternalPaymentInfo
+     * @var string $ThreeDSReferenceId
      */
 
     protected $data = [
@@ -86,6 +87,10 @@ class PaymentRequest extends ModelsBase
                 'required' => false,
             ],
             'OptionalProvidedCode' => [
+                'type' => 'string',
+                'required' => false,
+            ],
+            '$ThreeDSReferenceId' => [
                 'type' => 'string',
                 'required' => false,
             ],
