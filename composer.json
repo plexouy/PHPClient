@@ -1,5 +1,5 @@
 {
-	"name" : "cienty/php-sdk",
+	"name" : "cienty/plexo-sdk",
 	"type" : "library",
 	"license" : "AGPL-3.0-only",
 	"description" : "Plexo SDK para PHP",
