@@ -91,7 +91,7 @@ class PaymentRequest extends ModelsBase
                 'type' => 'string',
                 'required' => false,
             ],
-            '$ThreeDSReferenceId' => [
+            'ThreeDSReferenceId' => [
                 'type' => 'string',
                 'required' => false,
             ],
