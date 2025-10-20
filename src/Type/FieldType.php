@@ -99,6 +99,10 @@ class FieldType {
     const ISSUERFEEAMOUNT= 0x820;
     const TAXDISCOUNTAMOUNT= 0x821;
     const TAXDISCOUNTLAW= 0x822;
+    const BUYERFEERATE= 0x823;
+    const ISSUERFEERATE= 0x824;
+    const AMOUNTBRL= 0x825;
+    const KOINMERCHANTID= 0x826;
     
     
     // Secure Information Starts at 0x8100. Private Flag | User Flag
@@ -204,6 +208,10 @@ class FieldType {
         'IssuerFeeAmount',
         'TaxDiscountAmount',
         'TaxDiscountLaw',
+        'BuyerFeeRate',
+        'IssuerFeeRate',
+        'AmountBrl',
+        'KoinMerchantId',
         0x8101 => 'Pan',
         'Token',
         'UniqueId',
