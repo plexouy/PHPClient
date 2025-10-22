@@ -91,8 +91,8 @@ class Item extends ModelsBase// implements PlexoModelInterface
     {
         return [
             //13-3-2025 allows negative numbers
-            //'Amount'                => is_null($this->Amount) ? null : ($canonize ? sprintf('float(%s)', (float) $this->Amount) : (float) $this->Amount),
-            'Amount'                => is_null($this->Amount) ? null : (float) $this->Amount,
+            'Amount'                => is_null($this->Amount) ? null : ($canonize ? sprintf('float(%s)', (float) $this->Amount) : (float) $this->Amount),
+            //'Amount'                => is_null($this->Amount) ? null : (float) $this->Amount,
             'ClientItemReferenceId' => $this->ClientItemReferenceId,
             'Description' => $this->Description,
             'Quantity' => $this->Quantity,
